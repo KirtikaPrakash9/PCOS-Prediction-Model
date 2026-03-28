@@ -1,0 +1,414 @@
+/* =============================================
+   PCOS Prediction System – style.css
+   ============================================= */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --primary-from : #667eea;
+  --primary-to   : #764ba2;
+  --primary      : #667eea;
+  --success      : #27ae60;
+  --danger       : #e74c3c;
+  --warning      : #f39c12;
+  --bg           : #f4f6fb;
+  --surface      : #ffffff;
+  --text         : #2c3e50;
+  --text-muted   : #7f8c8d;
+  --border       : #dce3ef;
+  --radius       : 12px;
+  --shadow       : 0 4px 20px rgba(102, 126, 234, 0.12);
+  --shadow-hover : 0 8px 30px rgba(102, 126, 234, 0.22);
+  --transition   : 0.25s ease;
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Hero Header ---------- */
+.hero {
+  background: linear-gradient(135deg, var(--primary-from) 0%, var(--primary-to) 100%);
+  color: #fff;
+  padding: 3rem 1.5rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+}
+
+.hero-content { position: relative; }
+
+.hero-icon { font-size: 3rem; margin-bottom: 0.6rem; animation: pulse 2.4s ease-in-out infinite; }
+
+.hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.4rem;
+}
+
+.hero p {
+  font-size: 1rem;
+  opacity: 0.88;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  flex: 1;
+  width: 100%;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: box-shadow var(--transition);
+}
+
+.card:hover { box-shadow: var(--shadow-hover); }
+
+/* ---------- Disclaimer ---------- */
+.disclaimer {
+  background: #fff8e1;
+  border-left: 4px solid var(--warning);
+  border-radius: 8px;
+  padding: 0.9rem 1.2rem;
+  font-size: 0.88rem;
+  color: #7d5a00;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------- Section Title ---------- */
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ---------- Fieldset ---------- */
+fieldset {
+  border: none;
+  margin-bottom: 1.8rem;
+}
+
+legend {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Form Grid ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.field-group .unit {
+  font-weight: 400;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.field-group input[type="number"] {
+  padding: 0.55rem 0.8rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.93rem;
+  color: var(--text);
+  background: var(--bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+}
+
+.field-group input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.18);
+  background: #fff;
+}
+
+.field-group input[readonly] {
+  background: #eef0f7;
+  color: var(--text-muted);
+  cursor: default;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Checkbox Cards ---------- */
+.symptoms-fieldset .checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.checkbox-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.9rem 0.6rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color var(--transition), background var(--transition), transform var(--transition);
+  user-select: none;
+  text-align: center;
+  background: var(--bg);
+}
+
+.checkbox-card:hover {
+  border-color: var(--primary);
+  background: #f0f2ff;
+  transform: translateY(-2px);
+}
+
+.checkbox-card input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.checkbox-card input[type="checkbox"]:checked + .cb-icon {
+  transform: scale(1.25);
+}
+
+.checkbox-card:has(input:checked) {
+  border-color: var(--primary);
+  background: #eef0ff;
+}
+
+.cb-icon { font-size: 1.6rem; transition: transform var(--transition); }
+
+.cb-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------- Submit Button ---------- */
+.submit-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.btn-predict {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: linear-gradient(135deg, var(--primary-from), var(--primary-to));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.9rem 2.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+  letter-spacing: 0.3px;
+}
+
+.btn-predict:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(102, 126, 234, 0.55);
+}
+
+.btn-predict:active { transform: translateY(0); }
+
+.btn-predict:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+/* Spinner */
+.btn-spinner {
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---------- Result Card ---------- */
+.result-card { animation: slideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.result-main {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+
+/* Gauge */
+.gauge-wrapper {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+}
+
+.gauge-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.gauge-bg   { stroke: var(--border); }
+.gauge-fill { stroke: var(--primary); transition: stroke-dashoffset 1s ease, stroke 0.4s ease; stroke-linecap: round; }
+
+.gauge-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--text);
+  gap: 1px;
+}
+
+.gauge-label small { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); align-self: flex-end; margin-bottom: 4px; }
+
+/* Risk badge */
+.risk-info { flex: 1; min-width: 180px; }
+
+.risk-badge {
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  border-radius: 50px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  margin-bottom: 0.5rem;
+}
+
+.risk-badge.high {
+  background: #fdecea;
+  color: var(--danger);
+  border: 2px solid var(--danger);
+}
+
+.risk-badge.low {
+  background: #eafaf1;
+  color: var(--success);
+  border: 2px solid var(--success);
+}
+
+.risk-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+/* Gauge color variants */
+.gauge-fill.high  { stroke: var(--danger); }
+.gauge-fill.low   { stroke: var(--success); }
+
+/* ---------- Recommendations ---------- */
+.recommendations {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.recommendations h3 { font-size: 1rem; margin-bottom: 0.7rem; color: var(--text); }
+
+.recommendations ul { padding-left: 1.3rem; }
+
+.recommendations li {
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ---------- Reset Button ---------- */
+.btn-reset {
+  background: none;
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition);
+}
+
+.btn-reset:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ---------- Utilities ---------- */
+.hidden { display: none !important; }
+
+/* ---------- Animations ---------- */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.1); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .result-main { flex-direction: column; align-items: center; text-align: center; }
+  .card { padding: 1.3rem; }
+}
+
+@media (max-width: 380px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .checkbox-grid { grid-template-columns: 1fr 1fr; }
+}

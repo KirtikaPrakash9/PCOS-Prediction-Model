@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PCOS Prediction System</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="hero-icon">🔬</div>
+      <h1>PCOS Prediction System</h1>
+      <p>AI-powered polycystic ovary syndrome risk assessment</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== DISCLAIMER ===== -->
+    <div class="disclaimer">
+      <strong>⚠️ Medical Disclaimer:</strong> This tool is for informational purposes only and
+      does not constitute medical advice. Always consult a qualified healthcare provider.
+    </div>
+
+    <!-- ===== FORM CARD ===== -->
+    <section class="card form-card">
+      <h2 class="section-title">Patient Information</h2>
+      <form id="pcos-form" novalidate>
+
+        <!-- Numeric Fields -->
+        <fieldset>
+          <legend>Clinical Measurements</legend>
+          <div class="form-grid">
+
+            <div class="field-group">
+              <label for="Age">Age <span class="unit">(years)</span></label>
+              <input type="number" id="Age" name="Age" min="15" max="50" step="1"
+                     placeholder="e.g. 28" required />
+            </div>
+
+            <div class="field-group">
+              <label for="BMI">BMI <span class="unit">(kg/m²)</span></label>
+              <input type="number" id="BMI" name="BMI" min="10" max="60" step="0.1"
+                     placeholder="e.g. 23.5" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Cycle_Length">Cycle Length <span class="unit">(days)</span></label>
+              <input type="number" id="Cycle_Length" name="Cycle_Length" min="15" max="90" step="1"
+                     placeholder="e.g. 30" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Follicle_No_L">Follicles – Left <span class="unit">(count)</span></label>
+              <input type="number" id="Follicle_No_L" name="Follicle_No_L" min="0" max="30" step="1"
+                     placeholder="e.g. 8" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Follicle_No_R">Follicles – Right <span class="unit">(count)</span></label>
+              <input type="number" id="Follicle_No_R" name="Follicle_No_R" min="0" max="30" step="1"
+                     placeholder="e.g. 9" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Avg_F_size_L">Avg Follicle Size L <span class="unit">(mm)</span></label>
+              <input type="number" id="Avg_F_size_L" name="Avg_F_size_L" min="2" max="40" step="0.1"
+                     placeholder="e.g. 14.0" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Avg_F_size_R">Avg Follicle Size R <span class="unit">(mm)</span></label>
+              <input type="number" id="Avg_F_size_R" name="Avg_F_size_R" min="2" max="40" step="0.1"
+                     placeholder="e.g. 13.5" required />
+            </div>
+
+            <div class="field-group">
+              <label for="TSH">TSH <span class="unit">(mIU/L)</span></label>
+              <input type="number" id="TSH" name="TSH" min="0" max="20" step="0.01"
+                     placeholder="e.g. 2.5" required />
+            </div>
+
+            <div class="field-group">
+              <label for="AMH">AMH <span class="unit">(ng/mL)</span></label>
+              <input type="number" id="AMH" name="AMH" min="0" max="30" step="0.01"
+                     placeholder="e.g. 4.2" required />
+            </div>
+
+            <div class="field-group">
+              <label for="LH">LH <span class="unit">(mIU/mL)</span></label>
+              <input type="number" id="LH" name="LH" min="0" max="50" step="0.01"
+                     placeholder="e.g. 8.0" required />
+            </div>
+
+            <div class="field-group">
+              <label for="FSH">FSH <span class="unit">(mIU/mL)</span></label>
+              <input type="number" id="FSH" name="FSH" min="0" max="50" step="0.01"
+                     placeholder="e.g. 6.5" required />
+            </div>
+
+            <div class="field-group">
+              <label for="FSH_LH_ratio">FSH/LH Ratio</label>
+              <input type="number" id="FSH_LH_ratio" name="FSH_LH_ratio" min="0" max="20" step="0.001"
+                     placeholder="auto-computed" readonly />
+              <small class="hint">Auto-calculated from FSH ÷ LH</small>
+            </div>
+
+            <div class="field-group">
+              <label for="Waist">Waist <span class="unit">(cm)</span></label>
+              <input type="number" id="Waist" name="Waist" min="40" max="160" step="0.1"
+                     placeholder="e.g. 80" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Hip">Hip <span class="unit">(cm)</span></label>
+              <input type="number" id="Hip" name="Hip" min="50" max="160" step="0.1"
+                     placeholder="e.g. 95" required />
+            </div>
+
+            <div class="field-group">
+              <label for="Waist_Hip_Ratio">Waist-to-Hip Ratio</label>
+              <input type="number" id="Waist_Hip_Ratio" name="Waist_Hip_Ratio" min="0" max="3" step="0.001"
+                     placeholder="auto-computed" readonly />
+              <small class="hint">Auto-calculated from Waist ÷ Hip</small>
+            </div>
+
+          </div><!-- /form-grid -->
+        </fieldset>
+
+        <!-- Binary Symptoms -->
+        <fieldset class="symptoms-fieldset">
+          <legend>Symptoms &amp; Lifestyle</legend>
+          <div class="checkbox-grid">
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Weight_Gain"    name="Weight_Gain" />
+              <span class="cb-icon">⚖️</span>
+              <span class="cb-label">Weight Gain</span>
+            </label>
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Hair_Growth"    name="Hair_Growth" />
+              <span class="cb-icon">🧔</span>
+              <span class="cb-label">Excess Hair Growth</span>
+            </label>
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Skin_Darkening" name="Skin_Darkening" />
+              <span class="cb-icon">🌑</span>
+              <span class="cb-label">Skin Darkening</span>
+            </label>
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Hair_Loss"      name="Hair_Loss" />
+              <span class="cb-icon">💆</span>
+              <span class="cb-label">Hair Loss</span>
+            </label>
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Pimples"        name="Pimples" />
+              <span class="cb-icon">😣</span>
+              <span class="cb-label">Pimples / Acne</span>
+            </label>
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Fast_Food"      name="Fast_Food" />
+              <span class="cb-icon">🍔</span>
+              <span class="cb-label">Regular Fast Food</span>
+            </label>
+
+            <label class="checkbox-card">
+              <input type="checkbox" id="Reg_Exercise"   name="Reg_Exercise" />
+              <span class="cb-icon">🏃</span>
+              <span class="cb-label">Regular Exercise</span>
+            </label>
+
+          </div><!-- /checkbox-grid -->
+        </fieldset>
+
+        <div class="submit-row">
+          <button type="submit" class="btn-predict" id="submit-btn">
+            <span class="btn-text">🔍 Predict PCOS Risk</span>
+            <span class="btn-spinner hidden" aria-hidden="true"></span>
+          </button>
+        </div>
+
+      </form>
+    </section><!-- /form-card -->
+
+    <!-- ===== RESULTS ===== -->
+    <section class="card result-card hidden" id="result-section" aria-live="polite">
+      <h2 class="section-title">Prediction Result</h2>
+
+      <div class="result-main">
+        <!-- Circular gauge -->
+        <div class="gauge-wrapper">
+          <svg class="gauge-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="gauge-bg"   cx="60" cy="60" r="50"
+                    fill="none" stroke-width="12"/>
+            <circle class="gauge-fill" cx="60" cy="60" r="50"
+                    fill="none" stroke-width="12"
+                    stroke-dasharray="314"
+                    stroke-dashoffset="314"
+                    id="gauge-arc"/>
+          </svg>
+          <div class="gauge-label">
+            <span id="prob-value">0</span><small>%</small>
+          </div>
+        </div>
+
+        <!-- Risk badge -->
+        <div class="risk-info">
+          <div class="risk-badge" id="risk-badge">—</div>
+          <p class="risk-sub" id="risk-sub"></p>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="recommendations" id="recommendations">
+        <h3>💡 Recommendations</h3>
+        <ul id="rec-list"></ul>
+      </div>
+
+      <button class="btn-reset" id="reset-btn">↩ Start Over</button>
+    </section><!-- /result-section -->
+
+  </main>
+
+  <footer class="footer">
+    <p>PCOS Prediction System &nbsp;|&nbsp; Built with scikit-learn &amp; Flask
+       &nbsp;|&nbsp; <em>For educational use only</em></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
