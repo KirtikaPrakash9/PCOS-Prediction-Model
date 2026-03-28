@@ -62,7 +62,7 @@
   }
 
   const HIGH_RECS = [
-    'Consult a gynaecologist or endocrinologist for a thorough evaluation.',
+    'Consult a gynecologist or endocrinologist for a thorough evaluation.',
     'Consider hormonal blood tests (LH, FSH, testosterone, insulin).',
     'Aim for a balanced, low-glycaemic diet and maintain a healthy weight.',
     'Engage in at least 150 min/week of moderate aerobic exercise.',

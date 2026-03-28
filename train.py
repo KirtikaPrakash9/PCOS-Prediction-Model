@@ -13,7 +13,7 @@ MODEL_DIR = os.path.join(os.path.dirname(__file__), 'model')
 
 def load_data():
     df = pd.read_csv(DATA_PATH)
-    df.dropna(inplace=True)
+    df = df.dropna()
     return df
 
 def evaluate(name, clf, X_test, y_test):

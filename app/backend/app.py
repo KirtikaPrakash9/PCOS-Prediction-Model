@@ -24,7 +24,10 @@ def predict():
     if not data:
         return jsonify({'error': 'No JSON payload received'}), 400
 
-    input_values = [float(data.get(f, 0)) for f in features]
+    try:
+        input_values = [float(data.get(f, 0)) for f in features]
+    except (TypeError, ValueError) as exc:
+        return jsonify({'error': f'Invalid value in request: {exc}'}), 400
     input_array  = np.array(input_values).reshape(1, -1)
     input_scaled = scaler.transform(input_array)
 
