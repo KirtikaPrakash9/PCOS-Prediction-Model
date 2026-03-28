@@ -1,0 +1,35 @@
+{
+  "model_name": "GradientBoosting",
+  "model_version": "pcos-risk-20260328T104510Z-2d242622",
+  "trained_at_utc": "2026-03-28T10:45:10.229253+00:00",
+  "feature_count": 22,
+  "features": [
+    "Age",
+    "BMI",
+    "Cycle_Length",
+    "Follicle_No_L",
+    "Follicle_No_R",
+    "Avg_F_size_L",
+    "Avg_F_size_R",
+    "TSH",
+    "AMH",
+    "LH",
+    "FSH",
+    "FSH_LH_ratio",
+    "Waist",
+    "Hip",
+    "Waist_Hip_Ratio",
+    "Weight_Gain",
+    "Hair_Growth",
+    "Skin_Darkening",
+    "Hair_Loss",
+    "Pimples",
+    "Fast_Food",
+    "Reg_Exercise"
+  ],
+  "train_config": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratify": true
+  }
+}

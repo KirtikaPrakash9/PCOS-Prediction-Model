@@ -39,6 +39,8 @@ PCOS is one of the most common hormonal disorders affecting people with ovaries,
 - **Personalised recommendations** – actionable guidance based on prediction
 - **Auto-computed ratios** – FSH/LH ratio and Waist-Hip Ratio calculated automatically in the form
 - **REST API** – `/predict` endpoint for programmatic access
+- **Model metadata** – `/model-info` endpoint and version included in prediction responses
+- **Training traceability** – `model/metrics.json` and `model/metadata.json` generated on every training run
 
 ---
 
@@ -52,6 +54,8 @@ PCOS-Prediction-Model/
 │   ├── pcos_model.pkl         # Trained Gradient Boosting model
 │   ├── scaler.pkl             # Fitted StandardScaler
 │   └── features.pkl           # Ordered feature list
+│   ├── metrics.json           # Model comparison metrics and best model
+│   └── metadata.json          # Model version, training timestamp, and config
 ├── app/
 │   ├── backend/
 │   │   └── app.py             # Flask application
@@ -169,12 +173,16 @@ python train.py
 {
   "prediction": 1,
   "probability": 87.3,
-  "risk": "High Risk"
+  "risk": "High Risk",
+  "model_version": "pcos-risk-20260328T104500Z-a1b2c3d4"
 }
 ```
 
 ### `GET /health`
 Returns `{\"status\": \"ok\"}`.
+
+### `GET /model-info`
+Returns model metadata and feature list.
 
 ---
 
