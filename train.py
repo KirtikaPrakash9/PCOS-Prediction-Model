@@ -1,20 +1,27 @@
 import os
 import joblib
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score,
+)
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'pcos_data.csv')
 MODEL_DIR = os.path.join(os.path.dirname(__file__), 'model')
+
 
 def load_data():
     df = pd.read_csv(DATA_PATH)
     df = df.dropna()
     return df
+
 
 def evaluate(name, clf, X_test, y_test):
     y_pred = clf.predict(X_test)
@@ -32,6 +39,7 @@ def evaluate(name, clf, X_test, y_test):
         print(f"  {k:<12}: {v}")
     return metrics
 
+
 def main():
     df = load_data()
     feature_cols = [c for c in df.columns if c != 'PCOS']
@@ -44,12 +52,14 @@ def main():
 
     scaler = StandardScaler()
     X_train_sc = scaler.fit_transform(X_train)
-    X_test_sc  = scaler.transform(X_test)
+    X_test_sc = scaler.transform(X_test)
 
     candidates = {
-        'LogisticRegression':       LogisticRegression(max_iter=1000, random_state=42),
-        'RandomForest':             RandomForestClassifier(n_estimators=200, random_state=42),
-        'GradientBoosting':         GradientBoostingClassifier(n_estimators=200, random_state=42),
+        'LogisticRegression': LogisticRegression(max_iter=1000, random_state=42),
+        'RandomForest': RandomForestClassifier(n_estimators=200, random_state=42),
+        'GradientBoosting': GradientBoostingClassifier(
+            n_estimators=200, random_state=42
+        ),
     }
 
     results = {}
@@ -65,9 +75,10 @@ def main():
 
     os.makedirs(MODEL_DIR, exist_ok=True)
     joblib.dump(trained[best_name], os.path.join(MODEL_DIR, 'pcos_model.pkl'))
-    joblib.dump(scaler,             os.path.join(MODEL_DIR, 'scaler.pkl'))
-    joblib.dump(feature_cols,       os.path.join(MODEL_DIR, 'features.pkl'))
+    joblib.dump(scaler, os.path.join(MODEL_DIR, 'scaler.pkl'))
+    joblib.dump(feature_cols, os.path.join(MODEL_DIR, 'features.pkl'))
     print("Saved: model/pcos_model.pkl, model/scaler.pkl, model/features.pkl")
+
 
 if __name__ == '__main__':
     main()
