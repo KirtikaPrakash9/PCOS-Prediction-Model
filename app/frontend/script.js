@@ -129,14 +129,19 @@
     for (const f of numericFields) {
       const el  = document.getElementById(f);
       const val = parseFloat(el.value);
-      if (isNaN(val) && !el.readOnly) {
-        el.focus();
-        el.style.borderColor = 'var(--danger)';
-        valid = false;
-        break;
+      if (isNaN(val)) {
+        if (!el.readOnly) {
+          el.focus();
+          el.style.borderColor = 'var(--danger)';
+          valid = false;
+          break;
+        }
+        // Readonly derived fields: skip sending if still empty (backend will flag missing)
+        payload[f] = 0;
+      } else {
+        el.style.borderColor = '';
+        payload[f] = val;
       }
-      el.style.borderColor = '';
-      payload[f] = isNaN(val) ? 0 : val;
     }
 
     if (!valid) {

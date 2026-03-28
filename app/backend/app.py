@@ -24,8 +24,12 @@ def predict():
     if not data:
         return jsonify({'error': 'No JSON payload received'}), 400
 
+    missing = [f for f in features if f not in data]
+    if missing:
+        return jsonify({'error': f'Missing required fields: {missing}'}), 400
+
     try:
-        input_values = [float(data.get(f, 0)) for f in features]
+        input_values = [float(data[f]) for f in features]
     except (TypeError, ValueError) as exc:
         return jsonify({'error': f'Invalid value in request: {exc}'}), 400
     input_array  = np.array(input_values).reshape(1, -1)

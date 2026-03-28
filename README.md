@@ -106,7 +106,7 @@ Three classifiers are evaluated; the best (by ROC-AUC) is saved automatically.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-org>/PCOS-Prediction-Model.git
+git clone https://github.com/KirtikaPrakash9/PCOS-Prediction-Model.git
 cd PCOS-Prediction-Model
 
 # 2. Create a virtual environment (recommended)
