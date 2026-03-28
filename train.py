@@ -1,4 +1,7 @@
 import os
+import json
+from datetime import datetime, timezone
+from uuid import uuid4
 import joblib
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -15,6 +18,8 @@ from sklearn.metrics import (
 
 DATA_PATH = os.path.join(os.path.dirname(__file__), 'data', 'pcos_data.csv')
 MODEL_DIR = os.path.join(os.path.dirname(__file__), 'model')
+METRICS_PATH = os.path.join(MODEL_DIR, 'metrics.json')
+METADATA_PATH = os.path.join(MODEL_DIR, 'metadata.json')
 
 
 def load_data():
@@ -38,6 +43,12 @@ def evaluate(name, clf, X_test, y_test):
     for k, v in metrics.items():
         print(f"  {k:<12}: {v}")
     return metrics
+
+
+def make_model_version():
+    timestamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    short_id = uuid4().hex[:8]
+    return f'pcos-risk-{timestamp}-{short_id}'
 
 
 def main():
@@ -70,6 +81,8 @@ def main():
         results[name] = evaluate(name, clf, X_test_sc, y_test)
 
     best_name = max(results, key=lambda n: results[n]['roc_auc'])
+    model_version = make_model_version()
+    trained_at = datetime.now(timezone.utc).isoformat()
     print(f"\n{'='*40}")
     print(f"Best model: {best_name}  (ROC-AUC={results[best_name]['roc_auc']})")
 
@@ -77,7 +90,35 @@ def main():
     joblib.dump(trained[best_name], os.path.join(MODEL_DIR, 'pcos_model.pkl'))
     joblib.dump(scaler, os.path.join(MODEL_DIR, 'scaler.pkl'))
     joblib.dump(feature_cols, os.path.join(MODEL_DIR, 'features.pkl'))
+    with open(METRICS_PATH, 'w', encoding='utf-8') as metrics_file:
+        json.dump(
+            {
+                'best_model': best_name,
+                'best_metrics': results[best_name],
+                'all_results': results,
+            },
+            metrics_file,
+            indent=2,
+        )
+    with open(METADATA_PATH, 'w', encoding='utf-8') as metadata_file:
+        json.dump(
+            {
+                'model_name': best_name,
+                'model_version': model_version,
+                'trained_at_utc': trained_at,
+                'feature_count': len(feature_cols),
+                'features': feature_cols,
+                'train_config': {
+                    'test_size': 0.2,
+                    'random_state': 42,
+                    'stratify': True,
+                },
+            },
+            metadata_file,
+            indent=2,
+        )
     print("Saved: model/pcos_model.pkl, model/scaler.pkl, model/features.pkl")
+    print("Saved: model/metrics.json, model/metadata.json")
 
 
 if __name__ == '__main__':
