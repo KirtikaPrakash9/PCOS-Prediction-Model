@@ -1,4 +1,4 @@
-# 🔬 PCOS Prediction System
+# PCOS Prediction System
 
 An end-to-end machine learning web application that predicts the risk of **Polycystic Ovary Syndrome (PCOS)** from clinical measurements and lifestyle factors.
 
@@ -7,11 +7,11 @@ An end-to-end machine learning web application that predicts the risk of **Polyc
 ![Flask](https://img.shields.io/badge/Flask-2.3%2B-green)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-> ⚠️ **Medical Disclaimer**: This tool is for educational and informational purposes only. It does not constitute medical advice. Always consult a qualified healthcare provider for diagnosis and treatment.
+> **Medical Disclaimer**: This tool is for educational and informational purposes only. It does not constitute medical advice. Always consult a qualified healthcare provider for diagnosis and treatment.
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -31,18 +31,18 @@ PCOS is one of the most common hormonal disorders affecting people with ovaries,
 
 ---
 
-## ✨ Features
+## Features
 
-- 🤖 **Multi-model training** – evaluates Logistic Regression, Random Forest, and Gradient Boosting; auto-selects the best by ROC-AUC
-- 🌐 **Web interface** – modern, responsive HTML/CSS/JS frontend served via Flask
-- 📊 **Animated results** – circular probability gauge with colour-coded risk level
-- 💡 **Personalised recommendations** – actionable guidance based on prediction
-- 🔄 **Auto-computed ratios** – FSH/LH ratio and Waist-Hip Ratio calculated automatically in the form
-- 🏥 **REST API** – `/predict` endpoint for programmatic access
+- **Multi-model training** – evaluates Logistic Regression, Random Forest, and Gradient Boosting; auto-selects the best by ROC-AUC
+- **Web interface** – modern, responsive HTML/CSS/JS frontend served via Flask
+- **Animated results** – circular probability gauge with colour-coded risk level
+- **Personalised recommendations** – actionable guidance based on prediction
+- **Auto-computed ratios** – FSH/LH ratio and Waist-Hip Ratio calculated automatically in the form
+- **REST API** – `/predict` endpoint for programmatic access
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 PCOS-Prediction-Model/
@@ -66,7 +66,7 @@ PCOS-Prediction-Model/
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 The dataset contains **541 synthetic samples** with realistic correlations, generated to mirror the structure of the Kaggle PCOS dataset.
 
@@ -90,7 +90,7 @@ PCOS prevalence in the dataset: **~35–43 %**
 
 ---
 
-## 📈 Model Performance
+## Model Performance
 
 Three classifiers are evaluated; the best (by ROC-AUC) is saved automatically.
 
@@ -102,7 +102,7 @@ Three classifiers are evaluated; the best (by ROC-AUC) is saved automatically.
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ```bash
 # 1. Clone the repository
@@ -122,7 +122,7 @@ python train.py
 
 ---
 
-## 🖥️ Usage
+## Usage
 
 ### Start the web server
 
@@ -146,7 +146,7 @@ python train.py
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 ### `POST /predict`
 
@@ -174,11 +174,11 @@ python train.py
 ```
 
 ### `GET /health`
-Returns `{"status": "ok"}`.
+Returns `{\"status\": \"ok\"}`.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -192,6 +192,6 @@ Returns `{"status": "ok"}`.
 
 ---
 
-## 📄 License
+## License
 
 MIT License – see [LICENSE](LICENSE) for details.
