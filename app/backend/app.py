@@ -5,11 +5,11 @@ import os
 
 app = Flask(__name__, static_folder='../frontend', static_url_path='')
 
-BASE      = os.path.dirname(os.path.abspath(__file__))
+BASE = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE, '..', '..', 'model')
 
-model    = joblib.load(os.path.join(MODEL_DIR, 'pcos_model.pkl'))
-scaler   = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
+model = joblib.load(os.path.join(MODEL_DIR, 'pcos_model.pkl'))
+scaler = joblib.load(os.path.join(MODEL_DIR, 'scaler.pkl'))
 features = joblib.load(os.path.join(MODEL_DIR, 'features.pkl'))
 
 
@@ -32,16 +32,16 @@ def predict():
         input_values = [float(data[f]) for f in features]
     except (TypeError, ValueError) as exc:
         return jsonify({'error': f'Invalid value in request: {exc}'}), 400
-    input_array  = np.array(input_values).reshape(1, -1)
+    input_array = np.array(input_values).reshape(1, -1)
     input_scaled = scaler.transform(input_array)
 
     prediction = int(model.predict(input_scaled)[0])
-    proba      = float(model.predict_proba(input_scaled)[0][1])
+    proba = float(model.predict_proba(input_scaled)[0][1])
 
     return jsonify({
-        'prediction':  prediction,
+        'prediction': prediction,
         'probability': round(proba * 100, 1),
-        'risk':        'High Risk' if prediction == 1 else 'Low Risk',
+        'risk': 'High Risk' if prediction == 1 else 'Low Risk',
     })
 
 
