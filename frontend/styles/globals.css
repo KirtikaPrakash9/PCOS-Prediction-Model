@@ -243,7 +243,6 @@ body {
   text-transform: uppercase;
   display: flex;
   align-items: baseline;
-  gap: 0;
 }
 
 .field-unit {

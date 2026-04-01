@@ -56,7 +56,7 @@ const INITIAL_FORM = {
   ...Object.fromEntries(BINARY_FIELDS.map((f) => [f.name, false])),
 };
 
-function AnimatedValue({ target, duration }) {
+function AnimatedValue({ target, duration = 1000 }) {
   const [value, setValue] = useState(0);
 
   useEffect(() => {
@@ -80,7 +80,8 @@ function AnimatedValue({ target, duration }) {
   return <>{value}</>;
 }
 
-AnimatedValue.defaultProps = { duration: 1000 };
+
+
 
 export default function Home() {
   const [form, setForm] = useState(INITIAL_FORM);

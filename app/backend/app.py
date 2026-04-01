@@ -7,7 +7,7 @@ import json
 
 app = Flask(__name__, static_folder='../frontend', static_url_path='')
 
-_cors_origins = os.environ.get('CORS_ORIGINS', '*').split(',')
+_cors_origins = os.environ.get('CORS_ORIGINS', 'http://localhost:3000').split(',')
 CORS(app, origins=[o.strip() for o in _cors_origins])
 
 BASE = os.path.dirname(os.path.abspath(__file__))
