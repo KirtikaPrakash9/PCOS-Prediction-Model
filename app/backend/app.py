@@ -1,10 +1,14 @@
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 import joblib
 import numpy as np
 import os
 import json
 
 app = Flask(__name__, static_folder='../frontend', static_url_path='')
+
+_cors_origins = os.environ.get('CORS_ORIGINS', '*').split(',')
+CORS(app, origins=[o.strip() for o in _cors_origins])
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 MODEL_DIR = os.path.join(BASE, '..', '..', 'model')
